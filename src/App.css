@@ -1,3 +1,86 @@
 .App {
-  
+  padding: 20px;
+  margin: 0 auto;
+  width: 580px;
+}
+
+.App .episode {
+  padding: 15px;
+  margin: 25px 0;
+  background-color: #d4f5d8;
+  border-radius: 8px;
+  box-shadow: 0 5px 5px rgb(0 0 0 / 20%);
+}
+
+.marker {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.marker img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.play-time {
+  text-align: center;
+  font-weight: bold;
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+}
+
+.btn {
+  font-size: 28px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  width: 80px;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  transition: 0.2s all ease-in-out;
+}
+
+.btn span {
+  font-weight: bolder;
+}
+
+.playBtn {
+  font-size: 48px;
+}
+
+.progress {
+  height: 10px;
+  -webkit-appearance: none;
+  width: 100%;
+  border-radius: 8px;
+  background: #006400;
+  cursor: pointer;
+  outline: none;
+}
+
+.progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 20px;
+  width: 5px;
+  background-color: #006400;
+}
+
+.progress::-webkit-slider-thumb:hover {
+  transform: scaleX(1.8);
+  transition: all .1s ease-out;
+}
+
+.progress:disabled,
+.btn:disabled {
+  cursor: not-allowed;
 }

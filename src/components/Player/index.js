@@ -110,6 +110,7 @@ const Player = ({ src, allowPlay, handleShowMarker, markers }) => {
 };
 
 const FormattedPlayTime = ({ currentTime, duration }) => {
+  
   const formatPlayTime = (seconds) => {
     let minutes = Math.floor(seconds / 60);
     minutes = minutes >= 10 ? minutes : minutes;
@@ -121,7 +122,7 @@ const FormattedPlayTime = ({ currentTime, duration }) => {
 
   return (
     <p className="play-time">
-      {`${formatPlayTime(currentTime)}/${formatPlayTime(duration)}`}
+      {formatPlayTime(currentTime)}/{formatPlayTime(duration)}
     </p>
   );
 };
