@@ -65,16 +65,6 @@ const Player = ({ src, allowPlay, handleShowMarker, markers }) => {
     }
   };
 
-  const progressPercent = duration ? `${(progress / duration) * 100}%` : '0%';
-  const progressBarStyle = {
-    background: `-webkit-gradient(
-                    linear, 0% 0%, 100% 0%, color-stop(${progressPercent}, #246326), 
-                    color-stop(${progressPercent}, #393939)
-                    )
-                `,
-    transition: 'all .1s ease-in',
-  };
-
   const handleSeekChange = (value) => {
     clear();
     audioRef.current.currentTime = value;
@@ -107,7 +97,6 @@ const Player = ({ src, allowPlay, handleShowMarker, markers }) => {
         onSeekChange={handleSeekChange}
         onSeekDragStop={onSeekDragStop}
         disabled={!allowPlay}
-        progressBarStyle={progressBarStyle}
       />
       <FormattedPlayTime currentTime={currentTime} duration={duration} />
       <Controls
