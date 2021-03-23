@@ -1,23 +1,34 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
+import { EpisodeList } from './components/Episode';
+
+import { SERVER_URL, INITIAL_EPISODES } from './constants';
+
 import './App.css';
 
 function App() {
+  const [episodes, setEpisodes] = useState(INITIAL_EPISODES);
+
+  useEffect(() => {
+    fetchEpisodes();
+  }, []);
+
+  const fetchEpisodes = async () => {
+    try {
+      const data = await fetch(`${SERVER_URL}/episodes`).then((res) =>
+        res.json()
+      );
+      if (data && data.length) {
+        setEpisodes(data);
+      }
+    } catch {
+      /**@todo: handle errors gracefully */
+      console.error('Unable to fetch episodes');
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <EpisodeList episodes={episodes} />
     </div>
   );
 }
