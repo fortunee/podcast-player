@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { EpisodeList } from './components/Episode';
+import { Route } from 'react-router-dom';
+import { EpisodeList, Episode } from './components/Episode';
 
 import { SERVER_URL, INITIAL_EPISODES } from './constants';
 
@@ -28,7 +29,13 @@ function App() {
 
   return (
     <div className="App">
-      <EpisodeList episodes={episodes} />
+      <Route path={['/', '/episodes']} exact>
+        <EpisodeList episodes={episodes} />
+      </Route>
+
+      <Route path="/episode/:episodeId">
+        <Episode />
+      </Route>
     </div>
   );
 }
