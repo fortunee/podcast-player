@@ -32,8 +32,7 @@ const Player = ({ src, allowPlay, handleShowMarker, markers }) => {
   }, [ended, clear]);
 
   const startTimer = () => {
-    clearInterval(intervalRef.current);
-    clearTimeout(timeoutRef.current);
+    clear()
     intervalRef.current = setInterval(() => {
       setProgress(audioRef.current.currentTime);
 
