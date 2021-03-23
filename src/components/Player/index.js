@@ -2,12 +2,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Controls from './Controls';
 import Seeker from './Seeker';
 
-const Player = ({ src, allowPlay }) => {
+const Player = ({ src, allowPlay, handleShowMarker, markers }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const audioRef = useRef(new Audio(src));
   const intervalRef = useRef();
+  const timeoutRef = useRef();
 
   const { duration, currentTime, ended } = audioRef.current;
 
@@ -15,6 +16,7 @@ const Player = ({ src, allowPlay }) => {
 
   const clear = useCallback(() => {
     clearInterval(intervalRef.current);
+    clearTimeout(timeoutRef.current);
   }, []);
 
   useEffect(() => {
@@ -31,8 +33,23 @@ const Player = ({ src, allowPlay }) => {
 
   const startTimer = () => {
     clearInterval(intervalRef.current);
+    clearTimeout(timeoutRef.current);
     intervalRef.current = setInterval(() => {
       setProgress(audioRef.current.currentTime);
+
+      markers.forEach((m) => {
+        if (m.start === Math.floor(audioRef.current.currentTime)) {
+          handleShowMarker(m);
+          audioRef.current.pause();
+          clearInterval(intervalRef.current);
+
+          timeoutRef.current = setTimeout(() => {
+            audioRef.current.play();
+            startTimer();
+            handleShowMarker();
+          }, m.duration * 1000);
+        }
+      });
     }, [1000]);
   };
 
