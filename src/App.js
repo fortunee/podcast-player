@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
-import { EpisodeList, Episode } from './components/Episode';
+import { EpisodeList, EpisodeDetails } from './components/Episode';
 
 import { SERVER_URL, INITIAL_EPISODES } from './constants';
 
@@ -34,7 +34,7 @@ function App() {
       </Route>
 
       <Route path="/episode/:episodeId">
-        <Episode />
+        <EpisodeDetails />
       </Route>
     </div>
   );
