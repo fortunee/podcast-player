@@ -23,6 +23,7 @@ const Player = ({ src, allowPlay, handleShowMarker, markers }) => {
     if (ended) {
       setIsPlaying(false);
       setProgress(0);
+      audioRef.current.currentTime = 0;
       clear();
     }
 
